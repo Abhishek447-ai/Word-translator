@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Voice Recognition and Content Generation </title>
+    <marquee> <b> <h2>:~The Tech Titans ~: </h2> </b> </marquee>
+    <style>
+             /* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background: linear-gradient(to right, #e0bbf5, #85e3ff); /* Light purple to light blue gradient */
+    background-size: 400% 400%; /* For smooth gradient transition */
+    animation: gradientAnimation 10s ease infinite; /* Background animation */
+    color: #000; /* Black text */
+    margin-top: 50px;
+    padding: 20px;
+    min-height: 100vh; /* Full height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5rem; /* Larger font size */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+    animation: textBounce 3s infinite; /* Bouncing animation */
+}
+
+button {
+    background-color: #4CAF50; /* Green */
+    color: #fff; /* White text */
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 30px; /* Rounded button */
+    transition: background-color 0.3s, transform 0.2s; /* Transition for effects */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    animation: float 3s ease-in-out infinite; /* Floating button effect */
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: translateY(-2px); /* Lift effect */
+}
+
+input, select {
+    margin: 10px 0;
+    padding: 10px;
+    width: 320px;
+    border: 1px solid #ccc;
+    border-radius: 25px; /* Rounded corners */
+    font-size: 16px;
+    transition: border-color 0.3s; /* Smooth border transition */
+}
+
+input:focus, select:focus {
+    border-color: #4CAF50; /* Green border on focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Focus shadow */
+}
+
+#transcript, #translatedText {
+    border: 1px solid #ccc;
+    padding: 15px;
+    width: 300px;
+    margin: 20px auto;
+    min-height: 50px;
+    background-color: white;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+#transcript {
+    font-style: italic;
+    color: #555; /* Slightly darker for contrast */
+}
+
+#translatedText {
+    font-weight: bold;
+    color: #333; /* Darker for emphasis */
+}
+
+#loading-indicator {
+    margin-top: 20px;
+    font-style: italic;
+    color: #999;
+    animation: pulse 2s infinite; /* Pulsing effect */
+}
+
+/* Keyframes for floating button */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Keyframes for background gradient animation */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Keyframes for text bouncing */
+@keyframes textBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Keyframes for pulsing effect */
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+    </style>
+</head>
+<body>
+    <h1>Voice Recognition and Content Generation</h1>
+    <button id="start-btn">Start Listening</button>
+    
+    <!-- Language Selection Dropdowns -->
+    <select id="input-language-select">
+        <option value="en-GB">English</option>
+        <option value="kn-IN">Kannada</option>
+        <option value="te-IN">Telugu</option>
+        <option value="ta-IN">Tamil</option>
+        <option value="hi-IN">Hindi</option>
+        <option value="am-ET">Amharic</option>
+        <option value="ar-SA">Arabic</option>
+        <option value="be-BY">Belarusian</option>
+        <option value="bem-ZM">Bemba</option>
+        <option value="bo-CN">Tibetan</option>
+        <option value="br-FR">Breton</option>
+        <option value="bs-BA">Bosnian</option>
+        <option value="ca-ES">Catalan</option>
+        <option value="cop-EG">Coptic</option>
+        <option value="cy-GB">Welsh</option>
+        <option value="da-DK">Danish</option>
+        <!-- Add other languages as needed -->
+    </select>
+    
+    <input id="input-text" placeholder="Enter text to generate content" />
+    
+    <select id="language-select">
+        <option value="en-GB">English</option>
+        <option value="kn-IN">Kannada</option>
+        <option value="te-IN">Telugu</option>
+        <option value="ta-IN">Tamil</option>
+        <option value="hi-IN">Hindi</option>
+        <option value="am-ET">Amharic</option>
+        <option value="ar-SA">Arabic</option>
+        <option value="be-BY">Belarusian</option>
+        <option value="bem-ZM">Bemba</option>
+        <option value="bo-CN">Tibetan</option>
+        <option value="br-FR">Breton</option>
+        <option value="bs-BA">Bosnian</option>
+        <option value="ca-ES">Catalan</option>
+        <option value="cop-EG">Coptic</option>
+        <option value="cy-GB">Welsh</option>
+        <option value="da-DK">Danish</option>
+        <!-- Add other languages as needed -->
+    </select>
+    
+    <button id="translate-btn">Generate Content</button>
+    
+    <div id="transcript">Transcript will appear here...</div>
+    <div id="translatedText">Generated content will appear here...</div>
+    <div id="loading-indicator" style="display: none;">Translating...</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputText = document.getElementById('input-text');
+            const translateBtn = document.getElementById('translate-btn');
+            const translatedText = document.getElementById('translatedText');
+            const startBtn = document.getElementById('start-btn');
+            const inputLangSelect = document.getElementById('input-language-select');
+            const languageSelect = document.getElementById('language-select');
+            const loadingIndicator = document.getElementById('loading-indicator');
+
+            // Initialize Speech Recognition
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US'; // Default language for voice recognition
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            // Function to call the translation API
+            async function translateContent(text, fromLang, toLang) {
+                const transLINK = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${fromLang}|${toLang}`;
+                try {
+                    const response = await fetch(transLINK, {
+                        method: 'GET'
+                    });
+                    const result = await response.json();
+                    if (result.responseStatus === 200) {
+                        return result.responseData.translatedText;
+                    } else {
+                        throw new Error(result.responseDetails || 'Translation failed');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    throw new Error("Failed to translate content. Please try again later.");
+                }
+            }
+
+            // Start listening for speech
+            startBtn.addEventListener('click', () => {
+                recognition.lang = inputLangSelect.value; // Set recognition language dynamically
+                recognition.start();
+            });
+
+            recognition.onresult = (event) => {
+                const transcriptText = event.results[0][0].transcript;
+                inputText.value = transcriptText; // Set input value to recognized speech
+                document.getElementById('transcript').innerText = transcriptText; // Display transcript
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Voice recognition error:', event);
+                document.getElementById('transcript').innerText = "Could not recognize speech. Please try again.";
+            };
+
+            recognition.onend = () => {
+                console.log('Voice recognition ended');
+            };
+
+            // Translate content on button click
+            translateBtn.addEventListener('click', async () => {
+                try {
+                    loadingIndicator.style.display = 'block'; // Show loading indicator
+                    const text = inputText.value.trim(); // Get the input text
+                    const fromLang = inputLangSelect.value; // Get the selected input language
+                    const toLang = languageSelect.value; // Get the selected output language
+
+                    if (!text) {
+                        translatedText.innerText = "Please enter text to generate content.";
+                        return; // Exit if no text
+                    }
+
+                    const translatedContent = await translateContent(text, fromLang, toLang); // Call MyMemory API
+                    console.log('Translated Content:', translatedContent); // Log the response
+                    translatedText.innerText = translatedContent; // Display the translated content
+                } catch (error) {
+                    console.error('Error:', error);
+                    translatedText.innerText = error.message || "An error occurred. Please try again.";
+                } finally {
+                    loadingIndicator.style.display = 'none'; // Hide loading indicator
+                }
+            });
+        });
+    </script>
+</body>
+</html>
